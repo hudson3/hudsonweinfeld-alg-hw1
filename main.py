@@ -66,8 +66,33 @@ def to_value(v):
         return int(v)
         
 def longest_run_recursive(mylist, key):
-    ### TODO
-    pass
+    if len(mylist) == 0:
+        return Result(0, 0, 0, True)
+    elif len(mylist) == 1:
+        if mylist[0] == key:
+            return Result(1, 1, 1, True)
+        else:
+            return Result(0, 0, 0, False)
+    else:
+        mid = len(mylist) // 2
+        left_result = longest_run_recursive(mylist[:mid], key)
+        right_result = longest_run_recursive(mylist[mid:], key)
+        
+        left_size = left_result.left_size
+        if left_result.is_entire_range:
+            left_size = len(mylist[:mid]) + right_result.left_size
+        
+        right_size = right_result.right_size
+        if right_result.is_entire_range:
+            right_size = len(mylist[mid:]) + left_result.right_size
+        
+        longest_size = max(left_result.longest_size, 
+                          right_result.longest_size,
+                          left_result.right_size + right_result.left_size)
+        
+        is_entire_range = left_result.is_entire_range and right_result.is_entire_range
+        
+        return Result(left_size, right_size, longest_size, is_entire_range)
 
 
 

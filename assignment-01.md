@@ -106,26 +106,22 @@ E.g., `longest_run([2,12,12,8,12,12,12,0,12,1], 12) == 3`
 
   - 3d. (4 pts) What is the Work and Span of this sequential algorithm?  
 .  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
-.  
+work: W(n) = 2W(n/2) + O(n)
+using master therom a=2 b=2 c=1 so W(n) = O(n log n)
+
+span: S(n) = S(n/2) + O(n)
+this is just going down one side so S(n) = O(n)
 .  
 
 
   - 3e. (4 pts) Assume that we parallelize in a similar way we did with `sum_list_recursive`. That is, each recursive call spawns a new thread. What is the Work and Span of this algorithm?  
 
 .  
-.  
-.  
-.  
-.  
-.  
-.  
+work stays the same: W(n) = O(n log n)
+parallelization doesnt change total work
+
+span: S(n) = S(n/2) + O(n)
+even with parallelization the combine step takes O(n) and cant be parallelized
+so S(n) = O(n) still
 .  
 
